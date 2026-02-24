@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>
+        Headlines
+    </title>
+
+</head>
+<body>
+    <h1>
+        Headlines
+    </h1>
+    {% for article in articles%}
+        <b>
+        {{article.title}} <br/>
+    </b>
+    <i>
+        {{article.published}} <br/>
+    </i>
+    <p>{{article.summary}}</p>
+    <hr/>
+    {% endfor %}
+</body>
+</html>

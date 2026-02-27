@@ -21,6 +21,6 @@ def bbc():
     return get_news("bbc")
 @app.route("/cnn")
 def cnn():
-    return get_news(cnn)
+    return get_news("cnn")
 if __name__ == "__main__":
     app.run()

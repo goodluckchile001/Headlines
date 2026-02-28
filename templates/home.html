@@ -1,4 +1,5 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
     <title>
         Headlines
@@ -6,18 +7,20 @@
 
 </head>
 <body>
+<form>
+    <input type="text" placeholder="search">
+    <input type="submit" value="submit">
+</form>
     <h1>
         Headlines
     </h1>
     {% for article in articles%}
-        <b>
-        {{article.title}} <br/>
-    </b>
+        <b><a href="{{article.link}}">{{article.title}}</a></b><br/>
     <i>
-        {{article.published}} <br/>
-    </i>
+        {{article.published}}</i><br/>
     <p>{{article.summary}}</p>
     <hr/>
     {% endfor %}
 </body>
 </html>
+

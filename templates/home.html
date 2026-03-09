@@ -7,13 +7,21 @@
 
 </head>
 <body>
-<form>
-    <input type="text" placeholder="search">
+<form method="GET">
+    <input type="text" name="publication" placeholder="search">
     <input type="submit" value="submit">
 </form>
     <h1>
         Headlines
     </h1>
+    <h2>Current weather</h2>
+<form method="GET">
+    <input type="text" name="city" placeholder="weather search">
+    <input type="submit" value="submit">
+</form>
+    <p>City: <b>{{weather.city}}</b></p>
+    <p>{{weather.description}} | {{weather.temperature}}&#8451;</p>
+    <h2>headlines</h2>
     {% for article in articles%}
         <b><a href="{{article.link}}">{{article.title}}</a></b><br/>
     <i>

@@ -4,6 +4,19 @@
     <title>
         Headlines
     </title>
+    <style>
+        html {
+        font-family:"Helvetica";
+        background:white;
+        }
+        body {
+        background: lightgrey;
+        max-width:900px;
+        margin:0 auto;
+        }
+        #header { lightsteelblue;
+        }
+    </style>
 
 </head>
 <body>
@@ -11,9 +24,12 @@
         <input type="text" name="publication" placeholder="search channel">
         <input type="submit" value="submit">
     </form>
-    <h1>
+    <div id="Header">
+        <h1>
         Headlines
-    </h1>
+        </h1>
+        <p> Headlines. Currency. Weather</p>
+    </div>
     <h2>Current weather</h2>
     <form method="GET">
         <input type="text" name="city" placeholder="weather search">

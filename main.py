@@ -26,24 +26,14 @@ CurrencyApi = os.getenv("CURRENCY_API")
 @app.route("/")
 def home():
 
-    publication = request.args.get("publication")
-    if not publication:
-        request.cookies.get("publication")
-        if not publication:
-            publication = DEFAULTS["publication"]
+    publication = getValueWithFallBack("publication")
     articles = get_news(publication)
 
-    city = request.args.get("city")
-    if not city:
-        city = DEFAULTS['city']
-    city =city.strip()
+
+    city = getValueWithFallBack("city")
     weather = get_weather(city)
-    currency_from = request.args.get("currency_from")
-    if not currency_from:
-        currency_from =DEFAULTS["currency_from"]
-    currency_to = request.args.get("currency_to")
-    if not currency_to:
-        currency_to = DEFAULTS["currency_to"]
+    currency_from = getValueWithFallBack("currency_from")
+    currency_to = getValueWithFallBack("currency_to")
     rate,currencies = get_rates(currency_from,currency_to)
 
     response = make_response(render_template("home.html",

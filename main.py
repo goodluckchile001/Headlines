@@ -72,15 +72,18 @@ def get_weather(query):
     return weather
 def get_rates(frm,to):
     currency_url = f"https://openexchangerates.org/api/latest.json?app_id={CurrencyApi}"
-    all_currency = requests.get(currency_url)
-    data = all_currency.json()
-    rates = data.get("rates",{})
-    frm_rates = rates.get(frm.upper())
-    to_rates = rates.get(to.upper())
+    try:
+        all_currency = requests.get(currency_url)
+        data = all_currency.json()
+        rates = data.get("rates",{})
+        frm_rates = rates.get(frm.upper())
+        to_rates = rates.get(to.upper())
 
-    if frm_rates and to_rates:
-        return to_rates/frm_rates,rates.keys()
-    return None
+        if frm_rates and to_rates:
+            return to_rates/frm_rates,rates.keys()
+    except Exception as e:
+        print(f"error fetching rates:{e}")
+    return 1.0,["USD","NGN","GBP","EUR"]
 def getValueWithFallBack(key):
     if request.args.get(key):
         return request.args.get(key)

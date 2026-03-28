@@ -23,7 +23,7 @@
     <p>{{weather.description}} | {{weather.temperature}}&#8451;</p>
     <h2>Currency</h2>
 
-    <form>
+    <form method="GET">
         from: <select name="currency_from">
                 {% for currency in currencies %}
                     <option value="{{currency}}" {% if currency_from == currency %} selected {% endif %} > {{currency}}</option>

@@ -28,7 +28,9 @@ def home():
 
     publication = request.args.get("publication")
     if not publication:
-        publication = DEFAULTS["publication"]
+        request.cookies.get("publication")
+        if not publication:
+            publication = DEFAULTS["publication"]
     articles = get_news(publication)
 
     city = request.args.get("city")
@@ -44,12 +46,18 @@ def home():
         currency_to = DEFAULTS["currency_to"]
     rate,currencies = get_rates(currency_from,currency_to)
 
-    return render_template("home.html",
+    response = make_response(render_template("home.html",
                            articles=articles,
                            weather=weather,
                            currency_to=currency_to,
                            currency_from=currency_from,
-                           rate=rate,currencies=sorted(currencies))
+                           rate=rate,currencies=sorted(currencies)))
+    expires = datetime.datetime.now() + datetime.timedelta(days=365)
+    response.set_cookie("publication",publication,expires=expires)
+    response.set_cookie("city",city,expires=expires)
+    response.set_cookie("currency_from",currency_from,expires=expires)
+    response.set_cookie("currency_to",currency_to,expires=expires)
+    return response
 
 def get_news(query):
     if not query or query.lower() not in RSS_FEED:
@@ -83,6 +91,14 @@ def get_rates(frm,to):
     if frm_rates and to_rates:
         return to_rates/frm_rates,rates.keys()
     return None
+def getValueWithFallBack(key):
+    if request.args.get(key):
+        return request.args.get(key)
+    if request.cookies.get(key):
+        return request.cookies.get(key)
+    return DEFAULTS[key]
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

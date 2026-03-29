@@ -5,42 +5,24 @@
         Headlines
     </title>
     <style>
-        html {
-        font-family:"Helvetica";
-        background:white;
-        }
-        body {
-        background: lightgrey;
-        max-width:900px;
-        margin:0 auto;
-        padding:20px;
-        }
         #Header {
-        background: lightsteelblue;
-        padding: 5;
+            background: lightsteelblue;
+            padding: 5px; /* Added px */
         }
-        #inner-header{
-        padding-left : 10;
+        #inner-header, #main {
+            padding-left: 10px; /* Added px */
         }
-        #main{
-        padding-left : 10;
+        input, select { /* Removed space before [ */
+            color: grey;
+            border: 1px solid black;
+            height: 30px;
+            margin: 2px 6px 16px 0px; /* Fixed 0ox to 0px */
         }
-        input [type="text"],select{
-        color : grey;
-        border: 1px solid black;
-        height: 30px;
-        line-height: 15px;
-        margin: 2px 6px 16px 0ox;
-        }
-        input [type ="submit"] {
-        padding: 5px 10px 5px 10px;
-        color: black;
-        background: lightsteelblue;
-        border: none;
-        box-shadow: 1px 1px 1px #4C6E91;
-        }
-        input [type ="submit"] :hover{
-        background: steelblue;
+        input[type="submit"] { /* Removed space before [ */
+            padding: 5px 10px;
+            background: lightsteelblue;
+            border: none;
+            cursor: pointer; /* Makes it look clickable */
         }
     </style>
 

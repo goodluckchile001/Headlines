@@ -12,8 +12,8 @@ app = Flask(__name__)
 DEFAULTS = {
     'publication':'bbc',
     'city':'Lagos',
-    "currency_from":"NGN",
-    "currency_to":"USD"
+    "currency_from":"USD",
+    "currency_to":"NGN"
 }
 RSS_FEED ={'bbc': 'https://feeds.bbci.co.uk/news/rss.xml',
            'cnn':'https://rss.cnn.com/rss/edition.rss',

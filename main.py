@@ -20,8 +20,8 @@ RSS_FEED ={'bbc': 'https://feeds.bbci.co.uk/news/rss.xml',
            'fox':'https://feeds.foxnews.com/foxnews/latest',
            'iol':'https://www.iol.co.za/cmlink/1.640'}
 
-API_KEY= os.getenv("WEATHER_API_KEY")
-CurrencyApi = os.getenv("CURRENCY_API")
+API_KEY= "907ca5c7ebf96a13e435f2ce904ecef3"
+CurrencyApi = "6a3eeae365314d6da18712a6b23515c4"
 
 @app.route("/")
 def home():

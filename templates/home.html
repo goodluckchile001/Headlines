@@ -5,28 +5,99 @@
         Headlines
     </title>
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            color: #333;
+        }
+
         #Header {
-            background-color : black;
+            background: linear-gradient(135deg, #000, #222);
             color: white;
+            padding: 40px 20px;
             text-align: center;
-            padding: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        #inner-header, #main {
+        #Header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
 
-            padding-left: 10px;
+        #main {
+            max-width: 900px;
+            margin: -30px auto 40px; /* Pulls content up slightly into the header area */
+            padding: 20px;
         }
-        input, select {
-            color: grey;
-            border: 2px solid black;
-            height: 30px;
-            margin: 2px 6px 16px 0px;
+
+        /* Card Styling */
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
         }
+
+        input[type="text"], select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 250px;
+        }
+
         input[type="submit"] {
-            padding: 5px 10px;
-            background: lightsteelblue;
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: white;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        /* News article styling */
+        .article {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+
+        .article a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .article a:hover {
+            text-decoration: underline;
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        .weather-display, .rate-display {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            border-left: 5px solid #3498db;
         }
     </style>
 
@@ -38,46 +109,59 @@
                  Headlines. Currency. Weather
             </h1>
             <p>Everything is for a price</p>
+            <form method="GET" class="search-box" >
+                 <input type="text" name="publication" placeholder="search channel">
+                <input type="submit" value="submit">
+            </form>
+
         </div>
         <hr />
     </div>
-    <form method="GET">
-        <input type="text" name="publication" placeholder="search channel">
-        <input type="submit" value="submit">
-    </form>
 
     <div id="main">
-        <h2>Current weather</h2>
-        <form method="GET">
-            <input type="text" name="city" placeholder="weather search">
-            <input type="submit" value="submit">
-        </form>
-        <p>City: <b>{{weather.city}}</b></p>
-        <p>{{weather.description}} | {{weather.temperature}}&#8451;</p>
-        <h2>Currency</h2>
-
-        <form method="GET">
-            from: <select name="currency_from">
+        <div class="card">
+            <h2>Current weather</h2>
+            <form method="GET">
+                <input type="text" name="city" placeholder="weather search">
+                <input type="submit" value="Get weather">
+            </form>
+            <div class="weather-display">
+                <p style="font-size: 1.4rem; margin-bottom: 5px;">City: <b>{{weather.city}}</b></p>
+                <p>{{weather.description | capitalize}} | <b>{{weather.temperature}}°C</b></p>
+                <h2>Currency</h2>
+            </div>
+        </div>
+        <div class="card">
+            <h2>Currency Converter</h2>
+            <form method="GET">
+                <label>From:</label>
+                <select name="currency_from">
                     {% for currency in currencies %}
                         <option value="{{currency}}" {% if currency_from == currency %} selected {% endif %} > {{currency}}</option>
                     {% endfor %}
                 </select>
-            to: <select name="currency_to">
+                <label>To:</label>
+                <select name="currency_to">
                    {% for currency in currencies %}
                         <option value="{{currency}}" {% if currency_to == currency %} selected {% endif %} > {{currency}}</option>
                     {% endfor %}
                 </select>
-            <input type="submit" value="Submit">
-        </form>
-        1 {{currency_from}} = {{currency_to}} {{rate}}
-        <h2>headlines</h2>
-        {% for article in articles%}
-            <b><a href="{{article.link}}">{{article.title}}</a></b><br/>
-        <i>
-            {{article.published}}</i><br/>
-        <p>{{article.summary}}</p>
-        <hr/>
-        {% endfor %}
+                 <input type="submit" value="Submit">
+            </form>
+            <div class="rate-display">
+                <p>1 {{currency_from}} = {{currency_to}} <b>{{rate}}</b></p>
+            </div>
+        </div>
+        <div class="card">
+            <h2>headlines</h2>
+            {% for article in articles%}
+                <b><a href="{{article.link}}">{{article.title}}</a></b><br/>
+            <i>
+                {{article.published}}</i><br/>
+            <p>{{article.summary}}</p>
+            <hr/>
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>

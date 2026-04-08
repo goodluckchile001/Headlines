@@ -99,6 +99,15 @@
             margin-top: 15px;
             border-left: 5px solid #3498db;
         }
+        .article-link {
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .article-link:hover {
+            color: var(--accent-color);
+        }
     </style>
 
 </head>
@@ -153,9 +162,9 @@
             </div>
         </div>
         <div class="card">
-            <h2>headlines</h2>
+            <h2>Headlines</h2>
             {% for article in articles%}
-                <b><a href="{{article.link}}">{{article.title}}</a></b><br/>
+                <b><a href="{{article.link}}" class="article-link">{{article.title}}</a></b><br/>
             <i>
                 {{article.published}}</i><br/>
             <p>{{article.summary}}</p>

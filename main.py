@@ -1,5 +1,4 @@
 
-import os
 from flask import Flask,render_template,request,make_response
 import feedparser
 import requests
@@ -80,7 +79,8 @@ def get_rates(frm,to):
         to_rates = rates.get(to.upper())
 
         if frm_rates and to_rates:
-            return to_rates/frm_rates,rates.keys()
+            actual_rates = to_rates/frm_rates
+            return round(actual_rates,4),rates.keys()
     except Exception as e:
         print(f"error fetching rates:{e}")
     return 1.0,["USD","NGN","GBP","EUR"]
